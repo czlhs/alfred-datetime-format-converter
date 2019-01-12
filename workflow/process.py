@@ -17,13 +17,16 @@ def parse_query_value(query_str):
     try:
         query_str = str(query_str).strip('"\' ')
         if query_str == 'now':
-            d = utcnow()
+            #d = utcnow()
+            d = utcnow().shift('Asia/Shanghai')
         else:
             # Parse datetime string or timestamp
             try:
-                d = epoch(float(query_str))
+                #d = epoch(float(query_str))
+                d = epoch(float(query_str)).shift("Asia/Shanghai")
             except ValueError:
-                d = parse(str(query_str))
+                #d = parse(str(query_str))
+                d = parse(str(query_str)).shift('Asia/Shanghai')
     except (TypeError, ValueError):
         d = None
     return d
